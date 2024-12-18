@@ -34,9 +34,9 @@ export class UserController {
     if (!user) {
       throw new Error('Invalid credentials');
     }
-    const payload = { email: user.email, username: user.username, sub: user.id };
+    const payload = { email: user.email, username: user.username, roles: user.role, sub: user.id };
     // const token = sign(payload, 'secretKey', { expiresIn: '1h' });
     const token = await this.userService.jwtService.signAsync(payload)
-    return { token, user: { email: user.email, username: user.username } };
+    return { token, user: { email: user.email, username: user.username, role: user.role } };
   }
 }
